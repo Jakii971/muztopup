@@ -2,8 +2,8 @@ import { Box, Text } from '@chakra-ui/react'
 
 export default function Navbar() {
 	return (
-			<Box bg="blue" w="100%" p="4">
-				<Text color="white" fontWeight='bold'>MuzTopup</Text>
+			<Box w="100%" bg="white" p="4" borderBottom={2}>
+				<Text fontWeight='bold'>MuzTopup</Text>
 			</Box>
 	)
 }
