@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from '@/components/Navbar'
-import { Container, Box, Flex, Input, Text, Grid, Badge, Stack, Image } from "@chakra-ui/react";
+import { Container, Box, Input, Text, Grid, Badge, Stack, Image } from "@chakra-ui/react";
 import ItemDiamonds from '@/components/ItemDiamonds'
 import ItemPayment from '@/components/ItemPayment'
 
@@ -12,11 +12,12 @@ const Product: React.FC = () => {
         <Container as='aside' bg='white' p='15px'>
           <Image src='./images/banner.png' rounded='xl' />
           <Box display='flex' mt='20px'>
-            <Image src={'./images/free-fire.jpg'} display='block' borderRadius='xl' w='4rem' alt='haha' />
-            <Stack ml='10px'>
+            <Image src={'./images/free-fire.jpg'} display='block' borderRadius='xl' h='5rem' alt='haha' />
+            <Box ml='10px'>
               <Badge colorScheme="green" borderRadius="full" px="4" w="60%">TOP UP</Badge>
               <Text fontWeight='bold'>Mobile Legends</Text>
-            </Stack>
+              <Text color='blue' fontWeight='bold' fontSize='sm'>Lihat cara transaksi</Text>
+            </Box>
           </Box>
         </Container>
         <Box className={'InputID'}
