@@ -1,12 +1,15 @@
 import { Box, Text, Image } from '@chakra-ui/react'
 
 interface GamesProps {
-  name?: string
+  name: string;
+  image: string;
+  handleClick: (filterValue: string) => void;
 }
 
-export default function ItemGames({ name }: GamesProps) {
+export default function ItemGames({ name, image, handleClick }: GamesProps) {
+
   return (
-    <Box>
+    <Box  onClick={() => handleClick?.(name)} cursor='pointer'>
       <Box
         placeItems="center"
         bg='white'
@@ -15,7 +18,7 @@ export default function ItemGames({ name }: GamesProps) {
         borderRadius={'md'}
         overflow="hidden">
         <Image
-          src={"./images/free-fire.jpg"}
+          src={image}
           display={'block'}
           borderRadius={'md'}
           transition="transform 0.3s ease-in-out"
@@ -25,8 +28,8 @@ export default function ItemGames({ name }: GamesProps) {
           width="100%"
           height="100%"
           objectFit="cover"
-          alt="free-fire" />
-        <Text>{name ? name : "Free Fire"}</Text>
+          alt={image} />
+        <Text fontSize={'sm'} textAlign={'center'}>{name ? name : "Free Fire"}</Text>
       </Box>
     </Box>
   )

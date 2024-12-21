@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import { axiosInstance } from '../lib/axios';
 
-export const useFetchGames = () => {
+export const useFetchGameDiamonds = () => {
   const [gameServices, setGameServices] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 

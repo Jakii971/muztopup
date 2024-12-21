@@ -3,19 +3,22 @@ import Navbar from '@/components/Navbar'
 import { Container, Box, Input, Text, Grid, Badge, Stack, Image } from "@chakra-ui/react";
 import ItemDiamonds from '@/components/ItemDiamonds'
 import ItemPayment from '@/components/ItemPayment'
+import {useParams} from 'react-router'
 
 const Product: React.FC = () => {
+  const { filterValue } = useParams<{ filterValue: string }>();
+
   return (
-    <Stack bg='gray.100'>
+    <Stack bg='gray.100' position="relative">
       <Navbar />
-      <Box>
+      <Box mb='120px'>
         <Container as='aside' bg='white' p='15px'>
           <Image src='./images/banner.png' rounded='xl' />
           <Box display='flex' mt='20px'>
-            <Image src={'./images/free-fire.jpg'} display='block' borderRadius='xl' h='5rem' alt='haha' />
+            <Image src={'./images/free-fire.png'} display='block' borderRadius='xl' h='5rem' alt='free-fire' />
             <Box ml='10px'>
               <Badge colorScheme="green" borderRadius="full" px="4" w="60%">TOP UP</Badge>
-              <Text fontWeight='bold'>Mobile Legends</Text>
+              <Text fontWeight='bold'>{filterValue}</Text>
               <Text color='blue' fontWeight='bold' fontSize='sm'>Lihat cara transaksi</Text>
             </Box>
           </Box>
@@ -100,6 +103,15 @@ const Product: React.FC = () => {
           bgColor='white'
         >
           <Text fontSize="sm">Dengan klik tombol Beli sekarang, kamu sudah menyetujui Syarat & Ketentuan yang berlaku.</Text>
+        </Box>
+      </Box>
+      <Box position="fixed" bottom="0" w='full' h={'120px'} bg={'white'} display='flex' justifyContent={'space-between'} alignItems={'center'}>
+        <Box display='flex' flexDirection={'column'} ml={'20px'}>
+          <Text fontWeight={'bold'} fontSize={'xl'} color='red'>Rp5.799</Text>
+          <Text>19 Diamond</Text>
+        </Box>
+        <Box bg='blue.600' color='white' mr={'20px'} p='15px' rounded={'full'}>
+          <Text fontWeight={'bold'}>Beli Sekarang</Text>
         </Box>
       </Box>
     </Stack>
