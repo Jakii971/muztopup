@@ -1,4 +1,5 @@
 import { Box, Text, Image } from '@chakra-ui/react'
+import {Diamond} from '@/images'
 
 interface DiamondProps {
   name?: string
@@ -27,7 +28,7 @@ export default function ItemDiamonds({ name }: DiamondProps) {
       }}
     >
       <Box textAlign='start' p='10px'>
-        <Image src="./images/diamond.png" w="6" alt="diamond" />
+        <Image src={Diamond} w="6" alt="diamond" />
         <Text  fontSize='md'>{name ? name : "12"} Diamonds</Text>
         <Text  fontSize='xs'>{name ? name : "11 + 1"} Bonus</Text>
       </Box>

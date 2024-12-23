@@ -7,7 +7,6 @@ interface GamesProps {
 }
 
 export default function ItemPayment({ name, image }: GamesProps) {
-  // const [isSelected, setIsSelected] = useState(false);
 
   return (
     <Box
@@ -32,7 +31,7 @@ export default function ItemPayment({ name, image }: GamesProps) {
       }}
     >
       <Flex gap='15px' alignItems="center" ml='10px'>
-        <Image src={`./images/${image}.png`} object-fit='cover' maxW="5rem" maxH={'1.5rem'} alt={name} />
+        <Image src={image} object-fit='cover' maxW="5rem" maxH={'1.5rem'} alt={name} />
         <Text>{name ? name : "Undifine"}</Text>
       </Flex>
     </Box>

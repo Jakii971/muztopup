@@ -3,19 +3,40 @@ import Navbar from '@/components/Navbar'
 import { Container, Box, Input, Text, Grid, Badge, Stack, Image } from "@chakra-ui/react";
 import ItemDiamonds from '@/components/ItemDiamonds'
 import ItemPayment from '@/components/ItemPayment'
-import {useParams} from 'react-router'
+import {useFetchGameDiamonds} from '@/features/useFetchGameDiamonds'
+import { useParams } from 'react-router'
+import {
+  Banner,
+  MobileLegends,
+  Gopay,
+  SPay,
+  Ovo,
+  Qris
+} from '@/images'
+
 
 const Product: React.FC = () => {
   const { filterValue } = useParams<{ filterValue: string }>();
+
+  const { data, isLoading } = useFetchGameDiamonds();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (data) {
+    console.log("Data Fetching=",data)
+    return
+  }
 
   return (
     <Stack bg='gray.100' position="relative">
       <Navbar />
       <Box mb='120px'>
         <Container as='aside' bg='white' p='15px'>
-          <Image src='./images/banner.png' rounded='xl' />
+          <Image src={Banner} rounded='xl' />
           <Box display='flex' mt='20px'>
-            <Image src={'./images/free-fire.png'} display='block' borderRadius='xl' h='5rem' alt='free-fire' />
+            <Image src={MobileLegends} display='block' borderRadius='xl' h='5rem' alt='free-fire' />
             <Box ml='10px'>
               <Badge colorScheme="green" borderRadius="full" px="4" w="60%">TOP UP</Badge>
               <Text fontWeight='bold'>{filterValue}</Text>
@@ -89,10 +110,10 @@ const Product: React.FC = () => {
           <Text mb={4}>
             <Badge>3 </Badge> Pilih Pembayaran</Text>
           <Grid templateColumns="repeat(1, minmax(0, 1fr))" gap={4}>
-            <ItemPayment name='QRIS' image='qris' />
-            <ItemPayment name='Gopay' image='gopay' />
-            <ItemPayment name='Ovo' image='ovo' />
-            <ItemPayment name='Shopeepay' image='shopeepay' />
+            <ItemPayment name='QRIS' image={Qris} />
+            <ItemPayment name='Gopay' image={Gopay} />
+            <ItemPayment name='Ovo' image={Ovo} />
+            <ItemPayment name='Shopeepay' image={SPay} />
           </Grid>
         </Box>
         <Box
