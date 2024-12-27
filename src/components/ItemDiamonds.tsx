@@ -2,10 +2,16 @@ import { Box, Text, Image } from '@chakra-ui/react'
 import {Diamond} from '@/images'
 
 interface DiamondProps {
-  name?: string
+  game?: string;
+  name?: string;
+  price?: {
+    basic?: number;
+    premium?: number;
+    special?: number;
+  };
 }
 
-export default function ItemDiamonds({ name }: DiamondProps) {
+export default function ItemDiamonds({ name, price }: DiamondProps) {
   return (
     <Box
       as="button"
@@ -29,11 +35,10 @@ export default function ItemDiamonds({ name }: DiamondProps) {
     >
       <Box textAlign='start' p='10px'>
         <Image src={Diamond} w="6" alt="diamond" />
-        <Text  fontSize='md'>{name ? name : "12"} Diamonds</Text>
-        <Text  fontSize='xs'>{name ? name : "11 + 1"} Bonus</Text>
+        <Text  fontSize='md'>{name ? name : "12"}</Text>
       </Box>
       <Box textAlign='start' p='10px' bg='purple.300' roundedBottom="xl">
-        <Text fontSize='xs' fontWeight={'bold'} color='red'>Dari Rp{name ? name : "3.699"}</Text>
+        <Text fontSize='xs' fontWeight={'bold'} color='red'>Dari Rp{price?.basic || 0}</Text>
       </Box>
     </Box>
 

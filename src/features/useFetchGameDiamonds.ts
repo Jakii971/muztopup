@@ -1,59 +1,64 @@
-import {useState, useEffect} from 'react';
-import { axiosInstance } from '@/lib/axios';
-import{useParams} from 'react-router'
+import { axiosInstance } from "@/lib/axios";
+import { useQuery } from "@tanstack/react-query";
 
-interface GameServices{
+interface GameServices {
   id: number;
   name: string;
-  description:string;
+  description: string;
 }
 
-interface ApiResponse{
+interface ApiResponse {
   data: GameServices[];
+  total: number;
+  page: number;
+  per_page: number;
 }
 
-export const useFetchGameDiamonds = () => {
-  const [gameServices, setGameServices] = useState<GameServices[] | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const {filterValue} = useParams();
+const fetchGameServices = async (
+  page: number,
+  pageSize: number,
+  filterValue: string
+) => {
   const ApiKey = import.meta.env.VITE_APIKEYS;
   const Sign = import.meta.env.VITE_SIGNATURE;
-
-  const fetchGames = async (filterValue: string):Promise<void> =>{
-    setIsLoading(true)
-    try {
-      const dataGameServices = {
-        key: ApiKey,
-        sign: Sign,
-        type: 'services',
-        filter_type: 'game',
-        filter_status: 'available',
-        filter_value: filterValue,
-      }
-      const response = await axiosInstance.post<ApiResponse>('/game-feature', dataGameServices, {
+  try {
+    const requestDataGameServices = {
+      key: ApiKey,
+      sign: Sign,
+      type: "services",
+      filter_type: "game",
+      filter_status: "available",
+      filter_value: filterValue,
+      page,
+      per_page: pageSize,
+    };
+    const response = await axiosInstance.post<ApiResponse>(
+      "/game-feature",
+      requestDataGameServices,
+      {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-      });
-      console.log(response.data);
-      setGameServices(response.data.data);
-    } catch (err) {
-      console.error(err);
-    } finally{
-      setIsLoading(false);
-    }
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.error(err);
   }
+};
 
-  useEffect(() => {
-    if(filterValue){
-      fetchGames(filterValue)
-    }
-  }, []);
 
-  return{
-    data: gameServices,
-    isLoading: isLoading
-  }
-
-}
+export const useFetchGameDiamonds = (
+  page: number,
+  pageSize: number,
+  filterValue: string
+) => {
+  const queryKey = [
+    "gameDiamonds",
+    String(page),
+    String(pageSize),
+    filterValue,
+  ];
+  return useQuery({ queryKey, queryFn: () => fetchGameServices(page, pageSize, filterValue)});
+};
