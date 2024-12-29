@@ -21,9 +21,13 @@ import {
 } from "@/components/ui/pagination"
 
 interface GameService {
-  id: number;
-  name: string;
-  price: number;
+  game?: string;
+  name?: string;
+  price?: {
+    basic?: number;
+    premium?: number;
+    special?: number;
+  };
 }
 
 const pageSize = 6;
@@ -35,7 +39,7 @@ const Product: React.FC = () => {
 
   const startRange = (page - 1) * pageSize
   const endRange = startRange + pageSize
-  const visibleItems: GameService[] = data?.data.slice(startRange, endRange);
+  const visibleItems: GameService[] = data?.data.slice(startRange, endRange) ?? [];
 
 
   if (isLoading) {
@@ -115,7 +119,7 @@ const Product: React.FC = () => {
               <Badge>2 </Badge> Pilih Nominal</Text>
 
             <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-              {visibleItems?.map((item: GameService, index: number) => (
+              {visibleItems.map((item: GameService, index: number) => (
                 <ItemDiamonds key={index} name={item.name} price={item.price} />
               ))}
             </Grid>
@@ -123,11 +127,11 @@ const Product: React.FC = () => {
               page={page}
               pageSize={pageSize}
               count={data.data.length ?? 10}
-              variant="solid"
               defaultPage={1}
               onPageChange={(e) => setPage(e.page)}
+              colorScheme="teal"
             >
-              <HStack justifyContent="center" mt={4}>
+              <HStack justifyContent="center" mt={5}>
                 <PaginationPrevTrigger />
                 <PaginationItems />
                 <PaginationNextTrigger />

@@ -48,7 +48,6 @@ const fetchGameServices = async (
   }
 };
 
-
 export const useFetchGameDiamonds = (
   page: number,
   pageSize: number,
@@ -60,5 +59,8 @@ export const useFetchGameDiamonds = (
     String(pageSize),
     filterValue,
   ];
-  return useQuery({ queryKey, queryFn: () => fetchGameServices(page, pageSize, filterValue)});
+  return useQuery({
+    queryKey,
+    queryFn: () => fetchGameServices(page, pageSize, filterValue)
+  });
 };
