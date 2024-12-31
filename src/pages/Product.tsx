@@ -19,7 +19,6 @@ import {
   PaginationPrevTrigger,
   PaginationRoot,
 } from "@/components/ui/pagination"
-
 interface GameService {
   game?: string;
   name?: string;
@@ -51,7 +50,6 @@ const Product: React.FC = () => {
   }
 
   if (data) {
-    console.log("Data Fetching =", data)
     return (
       <Stack bg='gray.100' position="relative">
         <Navbar />
@@ -61,7 +59,7 @@ const Product: React.FC = () => {
             <Box display='flex' mt='20px'>
               <Image src={MobileLegends} display='block' borderRadius='xl' h='5rem' alt='free-fire' />
               <Box ml='10px'>
-                <Badge colorScheme="green" borderRadius="full" px="4" w="60%">TOP UP</Badge>
+                <Badge variant="solid" colorPalette="green" borderRadius="xl">TOP UP</Badge>
                 <Text fontWeight='bold'>{filterValue}</Text>
                 <Text color='blue' fontWeight='bold' fontSize='sm'>Lihat cara transaksi</Text>
               </Box>
@@ -74,7 +72,7 @@ const Product: React.FC = () => {
             bgColor='white'
           >
             <Text mb={4}>
-              <Badge>1 </Badge> Masukkan Detail Akun</Text>
+              <Badge colorPalette="purple" variant="surface">1 </Badge> Masukkan Detail Akun</Text>
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
               {/* Input ID */}
               <Box>
@@ -116,7 +114,8 @@ const Product: React.FC = () => {
             bgColor='white'
           >
             <Text mb={4}>
-              <Badge>2 </Badge> Pilih Nominal</Text>
+              <Badge colorPalette="purple" variant="surface">2 </Badge> Pilih Nominal
+            </Text>
 
             <Grid templateColumns="repeat(2, 1fr)" gap={4}>
               {visibleItems.map((item: GameService, index: number) => (
@@ -127,14 +126,30 @@ const Product: React.FC = () => {
               page={page}
               pageSize={pageSize}
               count={data.data.length ?? 10}
+              siblingCount={1}
               defaultPage={1}
               onPageChange={(e) => setPage(e.page)}
-              colorScheme="teal"
+              variant="solid"
+              size={'xs'}
             >
-              <HStack justifyContent="center" mt={5}>
-                <PaginationPrevTrigger />
+              <HStack justifyContent="center" px={4} mt={8}>
+                <PaginationPrevTrigger
+                  _hover={{
+                    bg: "green.100",
+                    color: "green.600",
+                  }}
+                  p={2}
+                  borderRadius="full"
+                />
                 <PaginationItems />
-                <PaginationNextTrigger />
+                <PaginationNextTrigger
+                  _hover={{
+                    bg: "green.100",
+                    color: "green.600",
+                  }}
+                  p={2}
+                  borderRadius="full"
+                />
               </HStack>
             </PaginationRoot>
           </Box>
@@ -146,7 +161,7 @@ const Product: React.FC = () => {
             bgColor='white'
           >
             <Text mb={4}>
-              <Badge>3 </Badge> Pilih Pembayaran</Text>
+              <Badge colorPalette="purple" variant="surface">3 </Badge> Pilih Pembayaran</Text>
             <Grid templateColumns="repeat(1, minmax(0, 1fr))" gap={4}>
               <ItemPayment name='QRIS' image={Qris} />
               <ItemPayment name='Gopay' image={Gopay} />
@@ -178,7 +193,6 @@ const Product: React.FC = () => {
   }
 
   return null;
-
 };
 
 export default Product;

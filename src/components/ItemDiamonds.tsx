@@ -35,7 +35,7 @@ export default function ItemDiamonds({ name, price }: DiamondProps) {
     >
       <Box textAlign='start' p='10px'>
         <Image src={Diamond} w="6" alt="diamond" />
-        <Text  fontSize='md'>{name ? name : "12"}</Text>
+        <Text  fontSize='sm'>{name ? name : "12"}</Text>
       </Box>
       <Box textAlign='start' p='10px' bg='purple.300' roundedBottom="xl">
         <Text fontSize='xs' fontWeight={'bold'} color='red'>Dari Rp{price?.basic || 0}</Text>
